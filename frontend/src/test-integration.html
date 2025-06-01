@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MindSpeak Integration Test</title>
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        const testEmail = `test${Date.now()}@example.com`;
+        const testPassword = 'password123';
+        
+        async function runTests() {
+            const results = document.getElementById('results');
+            
+            try {
+                // Test 1: Registration
+                results.innerHTML += '<h3>1. Testing Registration...</h3>';
+                const registerResponse = await fetch(`${API_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: testEmail, password: testPassword })
+                });
+                const registerData = await registerResponse.json();
+                results.innerHTML += `<p>✅ Registration: ${registerResponse.ok ? 'PASSED' : 'FAILED'}</p>`;
+                results.innerHTML += `<pre>${JSON.stringify(registerData, null, 2)}</pre>`;
+                
+                if (registerData.token) {
+                    // Test 2: Get current user
+                    results.innerHTML += '<h3>2. Testing Get Current User...</h3>';
+                    const meResponse = await fetch(`${API_URL}/auth/me`, {
+                        headers: { 'Authorization': `Bearer ${registerData.token}` }
+                    });
+                    const meData = await meResponse.json();
+                    results.innerHTML += `<p>✅ Get Current User: ${meResponse.ok ? 'PASSED' : 'FAILED'}</p>`;
+                    results.innerHTML += `<pre>${JSON.stringify(meData, null, 2)}</pre>`;
+                }
+                
+                // Test 3: Login
+                results.innerHTML += '<h3>3. Testing Login...</h3>';
+                const loginResponse = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: testEmail, password: testPassword })
+                });
+                const loginData = await loginResponse.json();
+                results.innerHTML += `<p>✅ Login: ${loginResponse.ok ? 'PASSED' : 'FAILED'}</p>`;
+                results.innerHTML += `<pre>${JSON.stringify(loginData, null, 2)}</pre>`;
+                
+                // Test 4: CORS
+                results.innerHTML += '<h3>4. Testing CORS...</h3>';
+                results.innerHTML += `<p>✅ CORS headers are ${registerResponse.headers.get('Access-Control-Allow-Origin') ? 'present' : 'missing'}</p>`;
+                
+                results.innerHTML += '<h2>✅ All tests completed!</h2>';
+                
+            } catch (error) {
+                results.innerHTML += `<p>❌ Error: ${error.message}</p>`;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>MindSpeak Frontend-Backend Integration Test</h1>
+    <button onclick="runTests()">Run Tests</button>
+    <div id="results"></div>
+</body>
+</html>
