@@ -1,0 +1,30 @@
+# Core Flask dependencies
+Flask
+Flask-SQLAlchemy
+Flask-JWT-Extended
+Flask-CORS
+Flask-Migrate
+
+# Database
+SQLAlchemy
+alembic
+
+# Security
+python-dotenv
+bcrypt
+
+# Utilities
+python-dateutil
+marshmallow
+
+# Development tools
+pytest
+pytest-flask
+black
+flake8
+
+# Production server
+gunicorn
+
+# API utilities
+requests

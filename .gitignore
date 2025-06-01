@@ -1,0 +1,9 @@
+.gitignore
+
+# ide
+.idea
+
+# private documents
+CLAUDE.md
+business_plan.md
+design.md
