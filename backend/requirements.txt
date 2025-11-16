@@ -28,3 +28,7 @@ gunicorn
 
 # API utilities
 requests
+
+# AI Services
+openai
+anthropic
