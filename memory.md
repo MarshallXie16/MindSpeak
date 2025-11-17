@@ -1,20 +1,32 @@
 # MindSpeak - Project Memory
 
 **Last Updated:** 2025-11-16
-**Project Status:** MVP Development - Backend & Frontend ~80% complete
-**Current Focus:** Environment setup, testing, and completing remaining MVP features
+**Project Status:** MVP Complete - Pivoting to Action-Driven Growth Platform
+**Current Focus:** Implementing data-driven differentiators from backlog
 
 ---
 
 ## Project Overview
 
-MindSpeak is a voice-based AI journaling application that transforms spoken thoughts into structured journal entries with AI-powered insights. Users speak naturally, and the app transcribes, formats, analyzes mood, detects emotions, and provides personalized insights.
+MindSpeak is evolving from a voice-based journaling app to an **action-driven mental wellness platform** that transforms passive reflection into measurable personal growth.
 
-### Core Value Proposition
-- **Voice-first journaling** → Natural, frictionless way to journal
-- **AI enhancement** → Transforms rambling speech into coherent entries
-- **Mental health insights** → Mood tracking, emotion analysis, personalized feedback
-- **Privacy-focused** → Personal journal with optional therapist sharing
+### Strategic Pivot (Nov 2025)
+**From:** Passive journaling tool (write → reflect → repeat)
+**To:** Active growth partner (set goals → track → insights → action → follow-up → achieve)
+
+### Core Value Propositions
+1. **Data-Driven Insights** → Quantifiable emotional trends, not just validation
+2. **Entity Mapping** → Discover hidden correlations (people, places, events vs mood)
+3. **Action-Oriented** → AI generates specific tasks, not just supportive messages
+4. **Challenging Patterns** → Therapeutic questioning, not just emotional validation
+5. **Long-Term Memory** → AI remembers your journey, references past growth
+6. **Proactive Care** → Check-ins at meaningful moments, not just when you open the app
+
+### Key Differentiators from Competitors
+- **vs Rosebud/Mindsera:** We show you the data and challenge assumptions (not just validate)
+- **vs Daylio:** AI-powered insights, not just mood tracking
+- **vs Reflectly:** Entity correlation analysis and goal-action loops
+- **Unique:** Therapist dashboard for clinical integration (B2B opportunity)
 
 ---
 
@@ -171,7 +183,7 @@ The AI pipeline is orchestrated by `JournalAIService` and runs asynchronously wi
 
 ### Claude Processing
 - **Service:** `ClaudeProcessor` (backend/app/services/claude_processor.py)
-- **Model:** claude-3-5-sonnet-20241022
+- **Model:** claude-haiku-4-5-20251001 (cheaper, faster)
 - **Max tokens:** 4000
 - **Input:** Raw transcript + user context (custom instructions, goals)
 - **Prompt engineering:** Preserves user voice, organizes thoughts, maintains authenticity
@@ -462,11 +474,17 @@ curl http://localhost:5000/api/auth/me \
 
 ## Testing Strategy
 
-### Backend (TODO)
-- pytest for unit tests
-- pytest-flask for integration tests
-- Test coverage target: 80%+
-- Mock OpenAI and Anthropic API calls
+### Backend (✅ Implemented)
+- **Framework:** pytest + pytest-flask
+- **Coverage:** Authentication, Models, Entry CRUD
+- **Location:** `backend/tests/`
+- **Files:**
+  - `conftest.py` - Test fixtures and configuration
+  - `test_auth.py` - Registration, login, JWT validation (15 tests)
+  - `test_models.py` - User, Entry, Preferences, Usage models (12 tests)
+  - `test_entries.py` - Entry CRUD and stats endpoints (8 tests)
+- **Run:** `cd backend && source venv/bin/activate && pytest`
+- **Total:** 35+ tests covering core functionality
 
 ### Frontend (TODO)
 - Jest + React Testing Library
@@ -593,3 +611,116 @@ git push -u origin branch-name
 ---
 
 **This document should be updated regularly as the project evolves.**
+
+---
+
+## Product Vision & Strategic Direction
+
+### Market Positioning
+**Target:** Therapy-goers, self-improvement seekers, wellness enthusiasts who journal regularly (TAM: 130M globally)
+
+**Competitive Landscape:**
+- **Rosebud, Mindsera, Reflectly:** AI-assisted but overly validating, no data-driven insights
+- **Daylio:** Data-driven but lacks AI personalization and insights
+- **MindSpeak:** Combines quantifiable insights with AI-powered action planning
+
+### Revenue Model
+**B2C (Primary):**
+- Free: 5 entries/month, basic features
+- Premium ($9.99/month): Unlimited entries, advanced analytics, proactive check-ins, exports
+- Pro ($19.99/month): Everything + calendar sync, habit tracking, vector search
+
+**B2B (Future):**
+- Therapist Dashboard: $20-30/month per therapist or $5/client
+- Enterprise/Clinic licenses
+
+### Feature Differentiation Priorities
+
+**Phase 1 (Weeks 1-4): Core Differentiation**
+- Data visualization dashboard
+- Entity extraction & correlation analysis
+- Text-based journaling
+
+**Phase 2 (Weeks 5-8): Active Growth**
+- Goal-setting with action loops
+- Challenging thinking patterns (CBT/DBT)
+- Advanced search & filtering
+
+**Phase 3 (Weeks 9-12): Long-Term Value**
+- Vector database for long-term memory
+- Proactive check-ins
+- Calendar integration
+
+**Phase 4 (Months 4-6): Growth & B2B**
+- Therapist dashboard
+- Habit & activity tracking
+- Export & data portability
+
+### Technical Debt & Future Work
+**High Priority:**
+- Move AI processing to background queue (Celery) instead of synchronous
+- Add rate limiting to prevent API abuse
+- Implement JWT refresh tokens
+- Add comprehensive logging
+
+**Medium Priority:**
+- Migrate to PostgreSQL for production
+- Add Redis caching layer
+- Implement API documentation (Swagger)
+- Database query optimization
+
+**Nice to Have:**
+- Mobile apps (React Native)
+- Offline mode
+- Service workers for PWA
+- Multi-language support
+
+### Success Metrics (OKRs)
+
+**Q1 2026:**
+- **Objective:** Validate product-market fit
+- **KR1:** 100 active users with >3 entries/month
+- **KR2:** 30% month-over-month retention
+- **KR3:** >4/5 user satisfaction score
+
+**Q2 2026:**
+- **Objective:** Prove differentiation with data features
+- **KR1:** 60% of users view analytics dashboard weekly
+- **KR2:** Entity correlations discovered in >70% of active users
+- **KR3:** 50% of users set at least 1 goal
+
+**Q3-Q4 2026:**
+- **Objective:** Launch B2B therapist product
+- **KR1:** 20 therapists using dashboard
+- **KR2:** $5k MRR from therapist subscriptions
+- **KR3:** 5+ clients per therapist on average
+
+### Development Principles
+
+1. **Ship Fast, Iterate Faster**
+   - MVP mindset: Validate before perfecting
+   - Weekly releases, A/B test everything
+
+2. **Data-Driven Decisions**
+   - Track engagement metrics for every feature
+   - User interviews weekly (5 users minimum)
+   - Quantify impact before building
+
+3. **Privacy First**
+   - User owns their data, full export anytime
+   - Transparent about what AI sees
+   - Opt-in for everything (therapist sharing, analytics, check-ins)
+
+4. **Therapeutic Integrity**
+   - Consult therapists on AI tone and interventions
+   - Don't overstep - we complement therapy, not replace it
+   - Crisis resources always accessible
+
+5. **Technical Excellence**
+   - Test coverage >70%
+   - Performance budgets (API <500ms, page load <2s)
+   - Accessibility (WCAG 2.1 AA compliance)
+
+---
+
+**This document is the single source of truth for technical decisions and architecture. Update it as the project evolves.**

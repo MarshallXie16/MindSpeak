@@ -1,29 +1,62 @@
 # MindSpeak - Tasks & Roadmap
 
 **Last Updated:** 2025-11-16
-**Sprint:** Environment Setup & MVP Completion
-**Target MVP Date:** Week of Nov 23, 2025
+**Sprint:** Post-MVP - Feature Differentiation Sprint
+**Strategic Focus:** Transform from basic journaling to action-driven growth platform
 
 ---
 
-## Current Sprint: Environment Setup & Testing
+## Recent Completions (Nov 16, 2025)
 
-### ✅ Completed
-- [x] Project architecture review
-- [x] Code audit (backend & frontend)
-- [x] Documentation structure created (CLAUDE.md, memory.md, tasks.md)
+### ✅ Environment & Testing Complete
+- [x] Backend virtual environment setup
+- [x] Frontend dependencies installed
+- [x] Database initialized and migrated
+- [x] Both servers running successfully
+- [x] Basic API testing passed
+- [x] **NEW:** Test suite created (35+ tests for auth, models, entries)
+- [x] **NEW:** Claude model updated to Haiku 4.5 (cheaper, faster)
+- [x] **NEW:** Comprehensive backlog created with product vision
 
-### 🚧 In Progress
-- [ ] Environment setup (backend + frontend)
-- [ ] Database initialization
-- [ ] Dependency installation
-- [ ] API key configuration
+### ✅ Documentation Complete
+- [x] CLAUDE.md - Autonomous agent instructions
+- [x] memory.md - Technical knowledge base (updated with vision)
+- [x] tasks.md - Development roadmap
+- [x] README.md - Setup guide
+- [x] PROJECT_STATUS.md - Current status
+- [x] **NEW:** BACKLOG.md - 30+ feature tickets aligned with market research
 
-### 📋 Backlog (This Sprint)
-- [ ] End-to-end testing (full user flow)
-- [ ] Fix any discovered bugs
-- [ ] Complete any incomplete features
-- [ ] Create comprehensive README.md
+### 🚧 Current Sprint: Feature Differentiation (Weeks 1-4)
+Focus on implementing P0 features that differentiate us from competitors.
+
+**Goal:** Launch beta with data visualization and entity correlation - the features no competitor has.
+
+### 📋 Sprint Backlog
+
+#### P0.1: Data Visualization Dashboard (5 days)
+- [ ] Design dashboard UI/UX mockups
+- [ ] Create `/api/analytics/mood-history` endpoint
+- [ ] Implement mood line chart (recharts)
+- [ ] Implement emotion breakdown pie chart
+- [ ] Add streak calendar heatmap
+- [ ] Make charts responsive and interactive
+- [ ] Write tests for analytics endpoints
+
+#### P0.2: Entity Extraction (7 days)
+- [ ] Research: Evaluate spaCy vs Claude entity extraction
+- [ ] Implement entity extraction in Claude prompt
+- [ ] Create `entities` and `entry_entities` tables
+- [ ] Build entity profile pages
+- [ ] Calculate mood correlations per entity
+- [ ] Show correlation insights in UI
+- [ ] Write entity extraction tests
+
+#### P1.5: Text-Based Journaling (3 days)
+- [ ] Add text editor component (markdown support)
+- [ ] Skip Whisper for text entries
+- [ ] Reuse Claude processing pipeline
+- [ ] Add entry type toggle in UI
+- [ ] Test text entry flow
 
 ---
 

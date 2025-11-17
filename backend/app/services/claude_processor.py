@@ -30,7 +30,7 @@ class ClaudeProcessor(JournalProcessor):
             raise ValueError("Anthropic API key is required")
         
         self.client = Anthropic(api_key=self.api_key)
-        self.model = "claude-3-5-sonnet-20241022"  # Latest model
+        self.model = "claude-haiku-4-5-20251001"  # Haiku 4.5 - cheaper and faster
         self.max_tokens = 4000
         
     async def process_transcript(
