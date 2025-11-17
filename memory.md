@@ -1,8 +1,8 @@
 # MindSpeak - Project Memory
 
-**Last Updated:** 2025-11-16
+**Last Updated:** 2025-11-17
 **Project Status:** MVP Complete - Pivoting to Action-Driven Growth Platform
-**Current Focus:** Implementing data-driven differentiators from backlog
+**Current Focus:** P0.1 Analytics Dashboard Complete - Implementing data-driven differentiators from backlog
 
 ---
 
@@ -156,6 +156,16 @@ MindSpeak is evolving from a voice-based journaling app to an **action-driven me
 - `POST /preferences/goals` - Add new goal
 - `DELETE /preferences/goals/:id` - Remove goal
 
+### Analytics (`/api/analytics`) - **NEW: P0.1**
+- `GET /mood-history` - Mood trends over time (query: days=7|30|90)
+  - Returns: daily mood averages, entry counts, overall summary, trend analysis
+- `GET /emotion-trends` - Emotion frequency and distribution (query: days)
+  - Returns: emotion counts, percentages, confidence scores, unique emotions
+- `GET /mood-by-weekday` - Average mood by day of week (query: days)
+  - Returns: weekday averages, entry counts, insights
+- `GET /word-frequency` - Common words with mood correlation (query: days, limit)
+  - Returns: word counts, mood averages, stopword filtering applied
+
 ---
 
 ## AI Processing Pipeline
@@ -194,6 +204,56 @@ The AI pipeline is orchestrated by `JournalAIService` and runs asynchronously wi
 The AI processing uses user preferences to personalize responses:
 - **custom_ai_instructions** - User's writing style preferences
 - **goals** - Personal goals to reference in insights
+
+---
+
+## Analytics Dashboard (P0.1) - COMPLETED 2025-11-17
+
+The analytics dashboard provides data-driven insights through interactive visualizations of mood trends, emotion patterns, and behavioral correlations. This is a key differentiator vs competitors who only provide basic mood tracking.
+
+### Backend Analytics API
+**Location:** `backend/app/routes/analytics.py`
+
+Four endpoints provide comprehensive analytics:
+1. **Mood History** - Daily mood aggregation with trend analysis (improving/declining/stable)
+2. **Emotion Trends** - Frequency distribution of detected emotions with confidence scores
+3. **Mood by Weekday** - Discovers day-of-week patterns with insights generation
+4. **Word Frequency** - Common themes with mood correlation, stopword filtering applied
+
+**Key Implementation Details:**
+- SQLAlchemy aggregation queries (GROUP BY date/weekday)
+- JSON-safe emotion parsing with malformed data handling
+- Trend calculation: compares first half vs second half of time period
+- Stopword list (150+ common words) for meaningful theme extraction
+- Mood correlation per word for deeper insights
+
+**Testing:** 23 comprehensive tests covering:
+- Empty data states
+- Edge cases (single entry, null values, deleted entries)
+- Data aggregation accuracy
+- Authentication requirements
+- All tests passing (100% success rate)
+
+### Frontend Analytics Page
+**Location:** `frontend/src/pages/Analytics.tsx`
+
+**Features:**
+- Time range selector (7/30/90 days)
+- Summary stat cards (avg mood, total entries, days tracked, trend)
+- Interactive charts using Recharts library:
+  - Line chart for mood over time
+  - Pie chart for emotion breakdown
+  - Bar chart for mood by weekday
+  - Word frequency grid with mood correlation
+- Empty state handling (prompts user to create entries)
+- Loading states and error handling
+- Responsive design for mobile
+
+**Navigation:** Added to Layout.tsx with BarChart2 icon, route at `/analytics`
+
+**Dependencies:**
+- `recharts` (38 packages, MIT license) - Production-ready charting library
+- Integrated with existing Axios API client
 
 ---
 
@@ -300,7 +360,8 @@ frontend/
 │   │   ├── ProcessingEntry.tsx # AI processing status
 │   │   ├── EntryEditor.tsx     # Edit journal entries
 │   │   ├── EntriesList.tsx     # Browse all entries
-│   │   └── Profile.tsx         # User settings
+│   │   ├── Profile.tsx         # User settings
+│   │   └── Analytics.tsx       # Data visualization dashboard (P0.1)
 │   └── components/
 │       ├── Layout.tsx          # App shell with navigation
 │       ├── ProtectedRoute.tsx  # Auth guard

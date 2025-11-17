@@ -20,10 +20,11 @@ def create_app(config_name='default'):
     CORS(app, resources={r"/api/*": {"origins": ["http://localhost:3000", "http://localhost:3001", "http://127.0.0.1:3000", "http://127.0.0.1:3001"]}})
     
     # Register blueprints
-    from app.routes import auth, entries, user
+    from app.routes import auth, entries, user, analytics
     app.register_blueprint(auth.bp, url_prefix='/api/auth')
     app.register_blueprint(entries.bp, url_prefix='/api/entries')
     app.register_blueprint(user.bp, url_prefix='/api/user')
+    app.register_blueprint(analytics.bp, url_prefix='/api/analytics')
     
     # Create upload directory
     import os

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Button } from './ui/Button';
-import { LogOut, Mic, Calendar, User, Plus, Home } from 'lucide-react';
+import { LogOut, Mic, Calendar, User, Plus, Home, BarChart2 } from 'lucide-react';
 import { NewEntryModal } from './NewEntryModal';
 
 /**
@@ -59,6 +59,13 @@ export function Layout({ children }: LayoutProps) {
               >
                 <Calendar className="h-4 w-4" />
                 <span>Entries</span>
+              </Link>
+              <Link
+                to="/analytics"
+                className="text-muted-foreground hover:text-foreground transition-colors flex items-center space-x-1"
+              >
+                <BarChart2 className="h-4 w-4" />
+                <span>Analytics</span>
               </Link>
               <Link
                 to="/profile"

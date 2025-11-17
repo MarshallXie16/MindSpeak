@@ -13,6 +13,7 @@ import { ProcessingEntry } from './pages/ProcessingEntry';
 import { EntryEditor } from './pages/EntryEditor';
 import { EntriesList } from './pages/EntriesList';
 import { Profile } from './pages/Profile';
+import { Analytics } from './pages/Analytics';
 
 /**
  * Main App component with routing setup
@@ -93,6 +94,17 @@ function App() {
               <ProtectedRoute>
                 <Layout>
                   <Profile />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/analytics"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <Analytics />
                 </Layout>
               </ProtectedRoute>
             }

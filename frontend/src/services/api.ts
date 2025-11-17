@@ -88,16 +88,31 @@ export const entriesAPI = {
 // User preferences API endpoints
 export const userAPI = {
   getProfile: () => api.get('/user/profile'),
-  
+
   updateProfile: (data: any) => api.put('/user/profile', data),
-  
+
   getPreferences: () => api.get('/user/preferences'),
-  
+
   updatePreferences: (data: any) => api.put('/user/preferences', data),
-  
+
   addGoal: (goalText: string) => api.post('/user/preferences/goals', { text: goalText }),
-  
+
   removeGoal: (goalId: number) => api.delete(`/user/preferences/goals/${goalId}`),
+};
+
+// Analytics API endpoints
+export const analyticsAPI = {
+  getMoodHistory: (days?: 7 | 30 | 90) =>
+    api.get('/analytics/mood-history', { params: { days } }),
+
+  getEmotionTrends: (days?: number) =>
+    api.get('/analytics/emotion-trends', { params: { days } }),
+
+  getMoodByWeekday: (days?: number) =>
+    api.get('/analytics/mood-by-weekday', { params: { days } }),
+
+  getWordFrequency: (days?: number, limit?: number) =>
+    api.get('/analytics/word-frequency', { params: { days, limit } }),
 };
 
 export default api;
